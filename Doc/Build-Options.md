@@ -11,29 +11,14 @@ This documentation explains those feature and how to modify them.
 
 ## Cameras module
 
-The Application is compatible with 4 Cameras:
+The Application is compatible with 3 Cameras:
 
 - MB1854B IMX335 (Default Camera provided with the MB1939 STM32N6570-DK board)
 - ST VD66GY
 - ST VD55G1
 
-### Makefile
-
-```bash
-make -j8
-```
-
-### STM32CubeIDE
-
-1. Right Click on the project -> Properties
-2. Click on C/C++ General
-3. Click on Path and Symbols
-4. Click Symbols
-5. Delete `USE_IMX335_SENSOR`
-6. Add a Symbol following the pattern `USE_<CAMERA>_SENSOR`; Replace \<CAMERA\> by one of these IMX335; VD66GY; VD55G1
-7. Click on Apply and Close
-
-![Select Camera With CubeIDE](../_htmresc/Modify_Camera_built_CubeIde.JPG)
+By default the app is built to support the 3 cameras in the same binary. It detects dynamically which sensor is connected.
+To remove support for specific sensors, delete the corresponding defines in [Inc/Application/STM32N6570-DK/Inc/cmw_camera_conf.h](../Application/STM32N6570-DK/Inc/cmw_camera_conf.h#L44) or [Inc/Application/NUCLEO-N657X0-Q/Inc/cmw_camera_conf.h](../Application/NUCLEO-N657X0-Q/Inc/cmw_camera_conf.h#L44).
 
 ## Camera Orientation
 
@@ -44,9 +29,10 @@ Cameras allows to flip the image along 2 axis.
 - CAMERA_FLIP_HVFLIP: Flip Both axis
 - CAMERA_FLIP_NONE: Default
 
-1. Open [app_config.h](../Inc/app_config.h)
+1. Open [Inc/Application/STM32N6570-DK/Inc/app_config.h](../Application/STM32N6570-DK/Inc/app_config.h) or [Inc/Application/NUCLEO-N657X0-Q/Inc/app_config.h](../Application/NUCLEO-N657X0-Q/Inc/app_config.h)
 
 2. Change CAMERA_FLIP define:
+
 ```C
 /*Defines: CMW_MIRRORFLIP_NONE; CMW_MIRRORFLIP_FLIP; CMW_MIRRORFLIP_MIRROR; CMW_MIRRORFLIP_FLIP_MIRROR;*/
 #define CAMERA_FLIP CMW_MIRRORFLIP_FLIP
@@ -76,7 +62,7 @@ To fit the camera image to the NN input and to the display 3 options are provide
 
 ![ASPECT_RATIO_FIT](../_htmresc/ASPECT_RATIO_MODE3.png)
 
-1. Open [app_config.h](../Inc/app_config.h)
+1. Open [Inc/Application/STM32N6570-DK/Inc/app_config.h](../Application/STM32N6570-DK/Inc/app_config.h) or [Inc/Application/NUCLEO-N657X0-Q/Inc/app_config.h](../Application/NUCLEO-N657X0-Q/Inc/app_config.h)
 2. Change ASPECT_RATIO_MODE:
 
 ```C
