@@ -51,6 +51,10 @@ This application is prebuilt with an object detection model.
 
 ## Update history
 
+### v2.3.1 / September 2026
+
+- Fix STM32_SigningTool_CLI API break since v2.21 by adding `--align` flag
+
 ### v2.3.0 / April 2026
 
 - New configuration for ModelZoo allows deploying larger models by storing epoch controller blob in flash memory

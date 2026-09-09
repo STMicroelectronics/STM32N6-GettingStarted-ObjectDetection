@@ -277,10 +277,18 @@ make -j8
 
 #### Program the Firmware in the External Flash
 
-After building the application, you must sign the binary file:
+After building the application, you must sign the binary file.
+
+Using STM32CubeProgrammer before v2.21:
 
 ```bash
 STM32_SigningTool_CLI -bin build/Application/<board_name>/Project.bin -nk -t ssbl -hv 2.3 -o build/Application/<board_name>/Project_sign.bin
+```
+
+Using STM32CubeProgrammer v2.21 or later:
+
+```bash
+STM32_SigningTool_CLI -bin build/Application/<board_name>/Project.bin -nk -t ssbl -hv 2.3 --align -o build/Application/<board_name>/Project_sign.bin
 ```
 
 Program the signed binary at address `0x70100000`, as well as the FSBL and network parameters.
